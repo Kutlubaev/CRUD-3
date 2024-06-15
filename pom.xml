@@ -15,13 +15,14 @@
     </properties>
 
     <dependencies>
-
+        <!-- Spring MVC dependency -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
 
+        <!-- Servlet API dependency -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -29,69 +30,60 @@
             <scope>provided</scope>
         </dependency>
 
-
+        <!-- Thymeleaf dependency -->
         <dependency>
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf-spring5</artifactId>
             <version>3.0.14.RELEASE</version>
         </dependency>
 
-
+        <!-- MySQL Connector dependency -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.32</version>
         </dependency>
 
-
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
+        <!-- Spring ORM dependency -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>6.0.15</version>
+            <version>${spring.version}</version>
         </dependency>
 
-
-        <!--        <dependency>-->
-<!--            <groupId>org.hibernate</groupId>-->
-<!--            <artifactId>hibernate-core</artifactId>-->
-<!--            <version>5.4.24.final</version>-->
-<!--        </dependency>-->
-
-
-        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+        <!-- Spring Data JPA dependency -->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <version>3.3.1</version>
+            <version>3.2.0</version> <!-- Обновите эту версию, чтобы она соответствовала версии Spring Framework -->
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
+        <!-- Hibernate EntityManager dependency -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>5.6.0.Final</version>
+            <version>5.6.6.Final</version> <!-- Обновите эту версию, чтобы она соответствовала версии Spring Framework -->
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
+        <!-- Apache Commons DBCP2 dependency -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-dbcp2</artifactId>
             <version>2.12.0</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/javax.transaction/jta -->
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <version>2.1.1</version> <!-- Укажите актуальную версию -->
+        </dependency>
+
+        <!-- JTA dependency -->
         <dependency>
             <groupId>javax.transaction</groupId>
             <artifactId>jta</artifactId>
             <version>1.1</version>
         </dependency>
-
-
-
-
-
-
     </dependencies>
 
     <build>
