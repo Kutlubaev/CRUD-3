@@ -6,18 +6,17 @@ import javax.persistence.*;
 @Table(name= "users")
 public class User {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "name")
     private String name;
 
-    @Column
+    @Column(name = "surname")
     private String surname;
 
-    @Column
+    @Column(name = "age")
     private int age;
 
     public String getName() {
@@ -62,12 +61,4 @@ public class User {
                 '}';
     }
 
-    public User(long id, String name, String surname, int age) {
-    }
-
-    public User(String name, String surname, int age) {
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
-    }
 }

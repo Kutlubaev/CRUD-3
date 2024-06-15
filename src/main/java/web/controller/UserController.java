@@ -5,56 +5,65 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import web.entity.User;
 import web.service.UserService;
+import web.service.UserServiceImpl;
+
+import java.util.List;
 
 @Controller
 public class UserController {
 
+    @Autowired
     private UserService userService;
 
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
-    public UserController(){}
 
 
-    @GetMapping(value="/users")
-    public String getAllUsers(Model model) {
-        model.addAttribute("allUsers",userService.getAll());
-        return "users";
+    @GetMapping(value="/")
+    public ModelAndView getAllUsers() {
+        List<User> users = userService.getAll();
+        ModelAndView view = new ModelAndView();
+        view.setViewName("allUsers");
+        view.addObject("usersList", users);
+        return view;
     }
 
     @GetMapping(value="users/add")
-    public String addUser(@RequestParam("name") String name
-            , @RequestParam("surname") String surname
-            , @RequestParam("age") int age, Model model) {
-        model.addAttribute("user",userService.save(name, surname, age));
-        return "addForm";
+    public ModelAndView addUser(@ModelAttribute("user") User user) {
+        ModelAndView view = new ModelAndView();
+        view.setViewName("redirect:/users");
+        userService.add(user);
+        return view;
     }
 
     @GetMapping(value="/id")
-    public String getUserById(@RequestParam("id") int id, Model model) {
-        model.addAttribute("user",userService.getById(id));
-        return "user";
+    public ModelAndView getUserById(@RequestParam("id") int id) {
+        User user = userService.getById(id);
+        ModelAndView view = new ModelAndView();
+        view.setViewName("userID");
+        view.addObject("user", user);
+        return view;
     }
 
     @PostMapping(value="/update")
-    public String updateUser(@RequestParam("name") String name
-            , @RequestParam("surname") String surname
-            , @RequestParam("age") int age, Model model) {
-        model.addAttribute("user",userService.update(name, surname, age));
-        return "redirect:/users";
+    public ModelAndView updateUser(@ModelAttribute("user") User user) {
+        ModelAndView view = new ModelAndView();
+        view.setViewName("redirect:/allUsers");
+        userService.update(user);
+        return view;
     }
 
     @PostMapping(value="/delete")
-    public String deleteUser(@RequestParam("id") int id, Model model) {
-        model.addAttribute("deleteUser", userService.delete(id));
-        return "redirect:/users";
+    public ModelAndView deleteUser(@RequestParam("id") int id) {
+        ModelAndView view = new ModelAndView();
+        view.setViewName("redirect:/allUsers");
+        User user = userService.getById(id);
+        userService.delete(user);
+        return view;
     }
 
 
