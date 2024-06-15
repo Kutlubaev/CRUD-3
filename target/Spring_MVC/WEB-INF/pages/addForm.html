@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление пользователя</title>
+</head>
+<body>
+<h2>Форма добавления пользователя</h2>
+<form action="redirect:/users" method="get">
+    <label for="name">Имя:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="surname">Фамилия:</label>
+    <input type="text" id="surname" name="surname" required>
+
+    <label for="age">Возраст:</label>
+    <input type="number" id="age" name="age" required min="0">
+
+    <input type="submit" value="Добавить пользователя">
+</form>
+</body>
+</html>
