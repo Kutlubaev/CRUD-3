@@ -1,26 +1,18 @@
 package web.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import web.entity.User;
 import web.repository.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
-
-    @Override
-    public List<User> getAll() {
-        return userRepository.findAll();
-    }
-
-    @Override
-    public User getById(long id) {
-        return userRepository.getOne(id);
-    }
+    private final UserRepository userRepository;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
@@ -28,23 +20,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Object save(String name, String surname, int age) {
-        userRepository.saveAndFlush(new User(name, surname, age));
-        return null;
+    public List<User> getAll() {
+        return userRepository.findAll();
     }
 
     @Override
-    public Object update(User user) {
-        userRepository.saveAndFlush(user);
-        return null;
+    public Optional<User> getById(long id) {
+        return userRepository.findById(id);
     }
 
     @Override
-    public Object delete(long id) {
+    public User save(String name, String surname, int age) {
+        return userRepository.save(new User(name, surname, age));
+    }
+
+    @Override
+    public User update(String name, String surname, int age) {
+        return userRepository.save(new User(name, surname, age));
+    }
+
+    @Override
+    public String delete(long id) {
         userRepository.deleteById(id);
         return null;
-    }
-
-    public UserServiceImpl() {
     }
 }

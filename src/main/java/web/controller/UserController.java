@@ -47,7 +47,7 @@ public class UserController {
     public String updateUser(@RequestParam("name") String name
             , @RequestParam("surname") String surname
             , @RequestParam("age") int age, Model model) {
-        model.addAttribute("user",userService.update(new User(name, surname, age)));
+        model.addAttribute("user",userService.update(name, surname, age));
         return "redirect:/users";
     }
 

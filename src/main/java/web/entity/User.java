@@ -1,7 +1,5 @@
 package web.entity;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 
 @Entity
@@ -64,7 +62,7 @@ public class User {
                 '}';
     }
 
-    public User() {
+    public User(long id, String name, String surname, int age) {
     }
 
     public User(String name, String surname, int age) {
