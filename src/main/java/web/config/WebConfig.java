@@ -21,6 +21,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
 
+
     public WebConfig(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
@@ -44,22 +45,22 @@ public class WebConfig implements WebMvcConfigurer {
         return templateEngine;
     }
 
-    @Bean
-    ViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("/WEB-INF/pages/");
-        viewResolver.setSuffix(".html");
-        return viewResolver;
-    }
-
-
-//    @Override
-//    public void configureViewResolvers(ViewResolverRegistry registry) {
-//        ThymeleafViewResolver resolver = new ThymeleafViewResolver();
-//        resolver.setTemplateEngine(templateEngine());
-//        registry.viewResolver(resolver);
-//        resolver.setCharacterEncoding("UTF-8");
-//        resolver.setContentType("text/html; charset=UTF-8");
-//
+//    @Bean
+//    public ViewResolver viewResolver() {
+//        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+//        viewResolver.setPrefix("/WEB-INF/pages/");
+//        viewResolver.setSuffix(".html");
+//        return viewResolver;
 //    }
+
+
+    @Override
+    public void configureViewResolvers(ViewResolverRegistry registry) {
+        ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+        resolver.setTemplateEngine(templateEngine());
+        registry.viewResolver(resolver);
+        resolver.setCharacterEncoding("UTF-8");
+        resolver.setContentType("text/html; charset=UTF-8");
+
+    }
 }

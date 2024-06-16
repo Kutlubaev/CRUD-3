@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import web.entity.User;
 import web.service.UserService;
@@ -23,49 +20,29 @@ public class UserController {
 
 
 
-    @GetMapping(value="/")
+    @GetMapping("/")
     public ModelAndView getAllUsers() {
         List<User> users = userService.getAll();
-        ModelAndView view = new ModelAndView();
-        view.setViewName("allUsers");
-        view.addObject("usersList", users);
-        return view;
+        ModelAndView modelAndView = new ModelAndView("allUsers");
+        modelAndView.addObject("usersList", users);
+        return modelAndView;
     }
 
-    @GetMapping(value="users/add")
-    public ModelAndView addUser(@ModelAttribute("user") User user) {
-        ModelAndView view = new ModelAndView();
-        view.setViewName("redirect:/users");
-        userService.add(user);
-        return view;
-    }
-
-    @GetMapping(value="/id")
-    public ModelAndView getUserById(@RequestParam("id") int id) {
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public ModelAndView editPage(@PathVariable("id") int id) {
         User user = userService.getById(id);
-        ModelAndView view = new ModelAndView();
-        view.setViewName("userID");
-        view.addObject("user", user);
-        return view;
+        ModelAndView modelAndView = new ModelAndView("editPage");
+        modelAndView.addObject("user", user);
+        return modelAndView;
     }
 
-    @PostMapping(value="/update")
-    public ModelAndView updateUser(@ModelAttribute("user") User user) {
-        ModelAndView view = new ModelAndView();
-        view.setViewName("redirect:/allUsers");
-        userService.update(user);
-        return view;
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public ModelAndView editUser(@ModelAttribute("user") User user) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/");
+        userService.edit(user);
+        return modelAndView;
     }
-
-    @PostMapping(value="/delete")
-    public ModelAndView deleteUser(@RequestParam("id") int id) {
-        ModelAndView view = new ModelAndView();
-        view.setViewName("redirect:/allUsers");
-        User user = userService.getById(id);
-        userService.delete(user);
-        return view;
-    }
-
 
 
 

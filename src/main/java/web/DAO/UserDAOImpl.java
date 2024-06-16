@@ -11,11 +11,12 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Repository
 public class UserDAOImpl implements UserDAO {
 
-    @Autowired
+    @PersistenceContext
     private EntityManager em;
+
 
 
     @Override
@@ -34,7 +35,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void update(User user) {
+    public void edit(User user) {
         em.merge(user);
     }
 

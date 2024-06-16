@@ -1,5 +1,6 @@
 package web.config;
 
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -10,13 +11,17 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     // Метод, указывающий на класс конфигурации
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{};
+        System.out.println("рут конфиг пошел");
+        return new Class[]{
+                HibernateConfig.class
+        };
     }
 
 
     // Добавление конфигурации, в которой инициализируем ViewResolver, для корректного отображения jsp.
     @Override
     protected Class<?>[] getServletConfigClasses() {
+        System.out.println("гет сервлет пошел");
         return new Class<?>[]{
                 WebConfig.class
         };
@@ -26,6 +31,7 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     /* Данный метод указывает url, на котором будет базироваться приложение */
     @Override
     protected String[] getServletMappings() {
+        System.out.println("еще один сервлет какой-то");
         return new String[]{"/"};
     }
 

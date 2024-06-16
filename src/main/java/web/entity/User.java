@@ -1,5 +1,6 @@
 package web.entity;
 
+
 import javax.persistence.*;
 
 @Entity

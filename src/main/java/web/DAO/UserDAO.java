@@ -1,9 +1,7 @@
 package web.DAO;
 
 import web.entity.User;
-
 import java.util.List;
-import java.util.Optional;
 
 public interface UserDAO {
     List<User> getAll();
@@ -12,7 +10,7 @@ public interface UserDAO {
 
     void add(User user);
 
-    void update(User user);
+    void edit(User user);
 
     void delete(User user);
 }
