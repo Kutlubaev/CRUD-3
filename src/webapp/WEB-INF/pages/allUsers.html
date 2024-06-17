@@ -22,9 +22,10 @@
         <td th:text="${user.age}">Возраст</td>
         <td>
             <!-- Ссылка на редактирование пользователя -->
-            <a th:href="@{/edit/{id}(id=${user.id})}">Редактировать</a>
+            <a th:href="@{/edit/(id=${user.id})}">Редактировать</a>
             <!-- Ссылка на удаление пользователя -->
-            <a th:href="@{/delete/{id}(id=${user.id})}">Удалить</a>
+<!--            <a th:href="@{/delete/{id}(id=${user.id})}">Удалить</a>-->
+            <a th:href="@{/delete(id=${user.id})}">Удалить</a>
         </td>
     </tr>
     </tbody>
