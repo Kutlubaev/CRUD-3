@@ -2,6 +2,10 @@ package web.entity;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name= "users")
@@ -12,12 +16,19 @@ public class User {
     private Long id;
 
     @Column(name = "name")
+    @NotEmpty(message = "name should be not empty")
+    @Pattern(regexp = "[а-яА-ЯёЁa-zA-Z]+", message = "Имя должно содержать только буквы")
+    @Size(min = 2 , max = 30)
     private String name;
 
     @Column(name = "surname")
+    @NotEmpty(message = "surname should be not empty")
+    @Pattern(regexp = "[а-яА-ЯёЁa-zA-Z]+", message = "Фамилия должна содержать только буквы")
+    @Size(min = 2 , max = 30)
     private String surname;
 
     @Column(name = "age")
+    @Min(value = 0, message = "Age should be greater than 0")
     private int age;
 
     public String getName() {

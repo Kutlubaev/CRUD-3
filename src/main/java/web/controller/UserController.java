@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import web.entity.User;
 import web.service.UserService;
 import web.service.UserServiceImpl;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -37,8 +39,12 @@ public class UserController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public ModelAndView editUser(@ModelAttribute("user") User user) {
+    public ModelAndView editUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("editPage");
+            return modelAndView;
+        }
         modelAndView.setViewName("redirect:/");
         userService.edit(user);
         return modelAndView;
@@ -53,8 +59,12 @@ public class UserController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelAndView addUser(@ModelAttribute("user") User user) {
+    public ModelAndView addUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("addPage");
+            return modelAndView;
+        }
         modelAndView.setViewName("redirect:/");
         userService.add(user);
         return modelAndView;
